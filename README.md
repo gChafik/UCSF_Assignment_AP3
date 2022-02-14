@@ -16,3 +16,4 @@ The script also needs values for these variables:
 * MY_PASSWORD
 * RECIPIENT_EMAIL
 These values can and should be stored in environment variables
+If using gmail there are security settings that might need to be changed first to be able to send email.
