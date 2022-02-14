@@ -4,17 +4,18 @@ import shutil
 import time
 import smtplib
 
-
 MY_EMAIL = "enter from email"
 MY_PASSWORD = "enter MY_EMAIL password"
 RECIPIENT_EMAIL = "enter to email"
 
+# Returns the files name is the files is a csv file
 def file_name():
     for file in os.listdir("./Input/"):
         if file.endswith(".csv"):
             return file.split(".")[0]
 
-def process_file(filename):
+# Writes the users in the list users_abc to a new file with the name of the original file + YYYYMMDDHH24MISS.csv
+def process_file(filename, users_abc):
     d = dt.now().strftime('%Y%m%d%H%M%S')
     outputfile = f"{filename}{d}.csv"
     with open(f'./Outgoing/{outputfile}', 'a') as users_output:
@@ -24,7 +25,7 @@ def process_file(filename):
     archive_file = f"./Archives/{filename}{d}.csv"
     shutil.move(original_file, archive_file)
 
-def send_email():
+def send_email(filename, total_entries, total_moved):
     connection = smtplib.SMTP("smtp.gmail.com", 587)
     connection.starttls()
     connection.login(MY_EMAIL, MY_PASSWORD)
@@ -46,10 +47,10 @@ while True:
         with open(f"./Input/{filename}.csv") as users_input:
             users_input_lst = users_input.readlines()
             users_abc = [user.rstrip('\n') for user in users_input_lst[1:] if user.rstrip('\n').endswith('@abc.edu')]
-            process_file(filename)
+            process_file(filename, users_abc)
             total_entries = len(users_input_lst)
             total_moved = len(users_abc)
-            send_email()
+            send_email(filename, total_entries, total_moved)
 
     else:
         print("No file to Process")
