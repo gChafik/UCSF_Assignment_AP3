@@ -18,12 +18,18 @@ def file_name():
 def process_file(filename, users_abc):
     d = dt.now().strftime('%Y%m%d%H%M%S')
     outputfile = f"{filename}{d}.csv"
-    with open(f'./Outgoing/{outputfile}', 'a') as users_output:
-        for user in users_abc:
-            users_output.write(f"{user}\n")
-    original_file = f"./Input/{filename}.csv"
-    archive_file = f"./Archives/{filename}{d}.csv"
-    shutil.move(original_file, archive_file)
+    if len(users_abc) != 0:
+        with open(f'./Outgoing/{outputfile}', 'a') as users_output:
+            for user in users_abc:
+                users_output.write(f"{user}\n")
+        original_file = f"./Input/{filename}.csv"
+        archive_file = f"./Archives/{filename}{d}.csv"
+        shutil.move(original_file, archive_file)
+    else:
+        print("No @abc.edu entries found in the file")
+        original_file = f"./Input/{filename}.csv"
+        archive_file = f"./Archives/{filename}{d}.csv"
+        shutil.move(original_file, archive_file)
 
 def send_email(filename, total_entries, total_moved):
     connection = smtplib.SMTP("smtp.gmail.com", 587)
