@@ -4,11 +4,9 @@ import shutil
 import time
 import smtplib
 
-# MY_EMAIL = "enter from email"
-# MY_PASSWORD = "enter MY_EMAIL password"
-# RECIPIENT_EMAIL = "enter to email"
-
-
+MY_EMAIL = "enter from email"
+MY_PASSWORD = "enter MY_EMAIL password"
+RECIPIENT_EMAIL = "enter to email"
 
 # Returns the files name is the files is a csv file
 def file_name():
@@ -46,7 +44,7 @@ def send_email(filename, total_entries, total_moved):
     )
     print('File has been processed')
 
-while True:
+def run():
     users_abc = []
     total_entries = 0
     total_moved = 0
@@ -62,6 +60,25 @@ while True:
 
     else:
         print("No file to Process")
-        time.sleep(10)
+
+run()
+
+# while True:
+#     users_abc = []
+#     total_entries = 0
+#     total_moved = 0
+#     filename = file_name()
+#     if os.path.exists(f"./Input/{filename}.csv"):
+#         with open(f"./Input/{filename}.csv") as users_input:
+#             users_input_lst = users_input.readlines()
+#             users_abc = [user.rstrip('\n') for user in users_input_lst[1:] if user.rstrip('\n').endswith('@abc.edu')]
+#             process_file(filename, users_abc)
+#             total_entries = len(users_input_lst)
+#             total_moved = len(users_abc)
+#             send_email(filename, total_entries, total_moved)
+#
+#     else:
+#         print("No file to Process")
+#         time.sleep(10)
 
 
