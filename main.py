@@ -4,9 +4,11 @@ import shutil
 import time
 import smtplib
 
-MY_EMAIL = "enter from email"
-MY_PASSWORD = "enter MY_EMAIL password"
-RECIPIENT_EMAIL = "enter to email"
+# MY_EMAIL = "enter from email"
+# MY_PASSWORD = "enter MY_EMAIL password"
+# RECIPIENT_EMAIL = "enter to email"
+
+
 
 # Returns the files name is the files is a csv file
 def file_name():
